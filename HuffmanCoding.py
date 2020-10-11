@@ -63,6 +63,13 @@ class Huffman:
             encoded_text+=self.codes[char]
         return encoded_text
 
+    def getPaddedEncodedText(self,encoded_text):
+        num_padded=8-len(encoded_text)%8 #eg. we get (len(encoded_text)%8)=5 ; then we need to append (8-5)=3 0's at the end
+        for i in range(num_padded):
+            encoded_text+='0'
+        padded_info={"0:08b"}.format(encoded_text) # means convert encoded text to 'b'-binary format in groups of 8 bits
+        padded_encoded_text=padded_info + encoded_text
+        return padded_encoded_text
 
     def compression(self):
         text="erewryhxcvbd"
@@ -78,3 +85,7 @@ class Huffman:
 
         # converting the whole text to codes
         encoded_text=self.get_encoded_text(text)
+
+        # pad the encoded text
+        # we pad the encoded text to multiples of 8 because if we don't, the system will by itself add 0's when storing in terms of bits
+        padded_encoded_text=self.getPaddedEncodedText(encoded_text)
