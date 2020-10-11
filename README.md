@@ -2,9 +2,9 @@
 Huffman algorithm is a string compression algorithm. It helps us to reduce the size of string data.</br>
 
 ## Data Structures used-
-*Tree
-*HashMap
-*Min Heap
+* Tree
+* HashMap
+* Min Heap
 
 ## Theory
 ### Step-1:
