@@ -71,6 +71,14 @@ class Huffman:
         padded_encoded_text=padded_info + encoded_text
         return padded_encoded_text
 
+    def getBytesArray(self,padded_encoded_text):
+        array=[]
+        for i in range(0,len(padded_encoded_text),8):
+            byte=padded_encoded_text[i:i+8]
+            array.append(int(byte,2)) # convert to int of base 2
+
+        return array
+
     def compression(self):
         text="erewryhxcvbd"
         
@@ -89,3 +97,6 @@ class Huffman:
         # pad the encoded text
         # we pad the encoded text to multiples of 8 because if we don't, the system will by itself add 0's when storing in terms of bits
         padded_encoded_text=self.getPaddedEncodedText(encoded_text)
+
+        # getting the byter array of the padded text
+        bytesArray=self.getBytesArray(padded_encoded_text)
