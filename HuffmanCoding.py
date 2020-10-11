@@ -18,6 +18,7 @@ class Huffman:
     def __init__(self,path):
         self.path=path
         self.heap=[]
+        self.codes={}
     
     def make_freq_dict(self,text):
         freq_dict={}
@@ -35,12 +36,33 @@ class Huffman:
         while len(self.heap)>1:
             node1=heapq.heappop(self.heap)
             node2=heapq.heappop(self.heap)
-            freq_sum=node1.freq+node2.freq
+            freq_sum=node1.freq+node2.freq # storing sum of freq of two leaf nodes
             newNode=BinaryTreeNode(None,freq_sum)
             newNode.left=node1
             newNode.right=node2
-            heapq.heappush(self.heap,newNode)
+            heapq.heappush(self.heap,newNode) # push the new node to the heap
         return 
+
+    def build_codes_helper(self,root,curr_bits):
+        if root is None:
+            return
+        if root.value is not None: # when i reach the leaf node, i store the codes.
+            self.codes[root.value]=curr_bits # all the character and their freq are present at leaf nodes
+            return
+            
+        self.build_codes_helper(root.left,curr_bits+"0")
+        self.build_codes_helper(root.right,curr_bits+"1")
+
+    def build_codes(self):
+        root=heapq.heappop(self.heap)
+        self.build_codes_helper(root,"")
+
+    def get_encoded_text(self,text):
+        encoded_text=""
+        for char in text:
+            encoded_text+=self.codes[char]
+        return encoded_text
+
 
     def compression(self):
         text="erewryhxcvbd"
@@ -53,3 +75,6 @@ class Huffman:
 
         # construct binary tree from heap
         self.build_tree()
+
+        # converting the whole text to codes
+        encoded_text=self.get_encoded_text(text)
