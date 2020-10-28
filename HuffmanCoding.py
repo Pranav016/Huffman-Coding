@@ -1,4 +1,5 @@
 import heapq
+import os
 
 class BinaryTreeNode:
     def __init__(self,value,freq):
@@ -68,7 +69,7 @@ class Huffman:
         for i in range(num_padded):
             encoded_text+='0'
             i+=1
-        padded_info="{0:08b}".format(encoded_text) # means convert encoded text to 'b'-binary format in groups of 8 bits
+        padded_info="{0:08b}".format(num_padded) # means convert encoded text to 'b'-binary format in groups of 8 bits
         padded_encoded_text=padded_info + encoded_text
         return padded_encoded_text
 
@@ -81,28 +82,67 @@ class Huffman:
         return array
 
     def compression(self):
-        text="erewryhxcvbd"
+        file_name,file_extension=os.path.splitext(self.path)
+        output_path=file_name+".bin"
         
-        # making freq dict
-        freq_dict=self.make_freq_dict(text)
+        with open(self.path,'r+') as file , open(output_path, 'wb') as output:
+            text=file.read()
+            text=text.rstrip()
 
-        # construct heap from freq_dict
-        self.build_heap(freq_dict)
+            # making freq dict
+            freq_dict=self.make_freq_dict(text)
 
-        # construct binary tree from heap
-        self.build_tree()
+            # construct heap from freq_dict
+            self.build_heap(freq_dict)
 
-        # converting the whole text to codes
-        encoded_text=self.get_encoded_text(text)
+            # construct binary tree from heap
+            self.build_tree()
 
-        # pad the encoded text
-        # we pad the encoded text to multiples of 8 because if we don't, the system will by itself add 0's when storing in terms of bits
-        padded_encoded_text=self.getPaddedEncodedText(encoded_text)
+            # converting the whole text to codes
+            encoded_text=self.get_encoded_text(text)
 
-        # getting the byter array of the padded text
-        bytesArray=self.getBytesArray(padded_encoded_text)
+            # pad the encoded text
+            # we pad the encoded text to multiples of 8 because if we don't, the system will by itself add 0's when storing in terms of bits
+            padded_encoded_text=self.getPaddedEncodedText(encoded_text)
 
-        # returning bytes array
-        final_array=bytes(bytesArray)
+            # getting the byter array of the padded text
+            bytesArray=self.getBytesArray(padded_encoded_text)
 
-        return final_array
+            # returning bytes array
+            final_array=bytes(bytesArray)
+            output.write(final_array)
+
+        print("compressed")
+        return output_path
+
+def remove_padding(self,padded_encoded_text):
+    pass
+
+
+def decode_text(self,encoded_text):
+    pass
+
+
+
+def decompress(self, input_path):
+		filename, file_extension = os.path.splitext(self.path)
+		output_path = filename + "_decompressed" + ".txt"
+
+		with open(input_path, 'rb') as file, open(output_path, 'w') as output:
+			bit_string = ""
+
+			byte = file.read(1)
+			while(len(byte) > 0):
+				byte = ord(byte)
+				bits = bin(byte)[2:].rjust(8, '0')
+				bit_string += bits
+				byte = file.read(1)
+
+			encoded_text = self.remove_padding(bit_string)
+
+			decompressed_text = self.decode_text(encoded_text)
+			
+			output.write(decompressed_text)
+
+		print("Decompressed")
+		return output_path
