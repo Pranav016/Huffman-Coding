@@ -74,5 +74,5 @@
 1. Clone the Repo to a particular folder on your system by going to your local Git Client and pushing this command: <br/>
 	```git clone https://github.com/Pranav016/Huffman-Coding.git  <folder-name>```
 
-1. Open the project in the Jupyter Notebook/VS code to use it.
+1. Open the project in the Jupyter Notebook/VS code to use it.</br>
     Entry file- useHuffman.py
