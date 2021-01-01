@@ -12,6 +12,10 @@ class BinaryTreeNode:
         return self.freq < other.freq
 
     def __eq__(self,other):
+        if(other == None):
+            return False
+        if(not isinstance(other,HeapNode)):
+            return False
         return self.freq == other.freq
 
 
@@ -29,8 +33,8 @@ class HuffmanCoding:
         return freq_dict
 
     def build_heap(self,freq_dict):
-        for key,value in freq_dict:
-            treeNode=BinaryTreeNode(key,value)
+        for key in freq_dict:
+            treeNode=BinaryTreeNode(key,freq_dict[key])
             heapq.heappush(self.heap,treeNode) # by default heapq makes a Min Heap
             # now we need to tell the computer that it needs to compare freq in the min heap, for that we overload a func __lt__ (less than)
 
@@ -43,16 +47,15 @@ class HuffmanCoding:
             newNode.left=node1
             newNode.right=node2
             heapq.heappush(self.heap,newNode) # push the new node to the heap
-        return 
+        return
 
     def build_codes_helper(self,root,curr_bits):
         if root is None:
             return
-        if root.value is not None: # when i reach the leaf node, i store the codes.
-            self.codes[root.value]=curr_bits # all the character and their freq are present at leaf nodes
-            self.reverse_mapping[curr_bits] = root.char
+        if root.value is not None:
+            self.codes[root.value]=curr_bits
+            self.reverse_mapping[curr_bits] = root.value
             return
-            
         self.build_codes_helper(root.left,curr_bits+"0")
         self.build_codes_helper(root.right,curr_bits+"1")
 
@@ -76,11 +79,10 @@ class HuffmanCoding:
         return padded_encoded_text
 
     def getBytesArray(self,padded_encoded_text):
-        array=[]
+        array=bytearray()
         for i in range(0,len(padded_encoded_text),8):
             byte=padded_encoded_text[i:i+8]
             array.append(int(byte,2)) # convert to int of base 2
-
         return array
 
     def compress(self):
@@ -99,6 +101,9 @@ class HuffmanCoding:
 
             # construct binary tree from heap
             self.build_tree()
+
+            # helps us to make a unique code for each and every character
+            self.build_codes()
 
             # converting the whole text to codes
             encoded_text=self.get_encoded_text(text)
