@@ -1,5 +1,7 @@
 # Huffman Coding
-Huffman algorithm is a string compression algorithm. It helps us to reduce the size of string data.</br>
+Huffman coding is a lossless data compression algorithm. In this algorithm, a variable-length code is assigned to input different characters. The code length is related to how frequently characters are used. Most frequent characters have the smallest codes and longer codes for least frequent characters</br>
+
+We create a frequency hashmap for all the characters in the string and then use data structures such as Min-Heap and Tree to convert these into binary codes. These binary codes are to be stored as bytes hence they are padded with zeros (to avoid default padding snce 1 byte=8 bits). This file is now compressed and has lesser size.</br>
 
 ## Data Structures used-
 * Tree
@@ -21,13 +23,37 @@ Huffman algorithm is a string compression algorithm. It helps us to reduce the s
 * We can then get a code for each character just by following the path on the resultant tree.
 * Make a map using this.
 
+### Step-6:
+* We then pad these codes with zeros to avoid default padding as we have to store these as bytes and 1 byte = 8bits.
+
+### Step-7:
+* We now convert the binary codes to bytes using `int(byte, 2)` and store it in the bytes array.
+
 ## Decompression of codes:
-* Use the map of codes for decompression of characters because these are prefix free codes hence decompression is easy.
+* We remove the padding and decode the binary codes.
+* We then use the `reverse_mapping` hashmap to convert the codes back to text.
+
+## Output:
+* When we run the `useHuffman.py`, two files are created.
+1. `sample.bin` -> binary file with less size
+1. `sample_decompressed.txt` -> decompressed text file
+
+<html>
+<body>
+	<table width="100%" border="0">
+  <tr>    
+  <td><img src="demo/1.png" alt="sample.txt img" align="left" /></td>
+  <td><img src="demo/2.png" alt="sample.bin img" align="center" /></td>
+  <td><img src="demo/3.png" alt="sample_decompressed.txt img" align="right"/></td>
+  </tr>
+</table>
+</body>
+</html>
 
 # Environment Setup and Local Installation:
 1. Drop a :star: on the Github Repository.
 
-1.  Make sure to install python on your computer- https://www.python.org/downloads/ </br>
+1.  Make sure to install python on your system- https://www.python.org/downloads/ </br>
 
 1. Download Python IDE or code editor for python code <br/>
 *	[Install Anaconda for Windows](https://docs.anaconda.com/anaconda/install/windows/) <br/>
