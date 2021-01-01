@@ -1,6 +1,6 @@
 <div align="center">
 
-<p style="font-size: 60px"><b>Huffman Coding</b></p>
+<h1>Huffman Coding</h1>
 
 ![Huffman-Coding](https://socialify.git.ci/Pranav016/Huffman-Coding/image?language=1&owner=1&pattern=Brick%20Wall&theme=Light)
 
