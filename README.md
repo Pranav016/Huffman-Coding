@@ -1,7 +1,14 @@
-# Huffman Coding
-Huffman coding is a lossless data compression algorithm. In this algorithm, a variable-length code is assigned to input different characters. The code length is related to how frequently characters are used. Most frequent characters have the smallest codes and longer codes for least frequent characters</br>
+<div align="center">
 
-We create a frequency hashmap for all the characters in the string and then use data structures such as Min-Heap and Tree to convert these into binary codes. These binary codes are to be stored as bytes hence they are padded with zeros (to avoid default padding snce 1 byte=8 bits). This file is now compressed and has lesser size.</br>
+<p style="font-size: 60px"><b>Huffman Coding</b></p>
+
+![Huffman-Coding](https://socialify.git.ci/Pranav016/Huffman-Coding/image?language=1&owner=1&pattern=Brick%20Wall&theme=Light)
+
+</div>
+
+<p>Huffman coding is a lossless data compression algorithm. In this algorithm, a variable-length code is assigned to input different characters. The code length is related to how frequently characters are used. Most frequent characters have the smallest codes and longer codes for least frequent characters</p>
+
+<p>We create a frequency hashmap for all the characters in the string and then use data structures such as Min-Heap and Tree to convert these into binary codes. These binary codes are to be stored as bytes hence they are padded with zeros (to avoid default padding snce 1 byte=8 bits). This file is now compressed and has lesser size.</p>
 
 ## Data Structures used-
 * Tree
@@ -39,15 +46,15 @@ We create a frequency hashmap for all the characters in the string and then use 
 1. `sample_decompressed.txt` -> decompressed text file
 
 <html>
-<body>
-	<table width="100%" border="0">
-  <tr>    
-  <td><img src="demo/1.png" alt="sample.txt img" align="left" /></td>
-  <td><img src="demo/2.png" alt="sample.bin img" align="center" /></td>
-  <td><img src="demo/3.png" alt="sample_decompressed.txt img" align="right"/></td>
-  </tr>
-</table>
-</body>
+  <body>
+    <table width="100%" border="0">
+      <tr>
+        <td><img src="demo/1.png" alt="sample.txt img" align="left" /></td>
+        <td><img src="demo/2.png" alt="sample.bin img" align="center" /></td>
+        <td><img src="demo/3.png" alt="sample_decompressed.txt img" align="right"/></td>
+      </tr>
+    </table>
+  </body>
 </html>
 
 # Environment Setup and Local Installation:
@@ -68,3 +75,4 @@ We create a frequency hashmap for all the characters in the string and then use 
 	```git clone https://github.com/Pranav016/Huffman-Coding.git  <folder-name>```
 
 1. Open the project in the Jupyter Notebook/VS code to use it.
+    Entry file- useHuffman.py
